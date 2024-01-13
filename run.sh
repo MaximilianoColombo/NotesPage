@@ -18,9 +18,8 @@ echo "Creating the .env file..."
 echo "DATABASE_URL=\"postgresql://$db_user:$db_password@localhost:$db_port/$db_name\"" >.env
 
 #PRISMA
-echo "Generate migrations"
-npx prisma migrate save --name init --experimental
-npx prisma migrate up --experimental
+echo "Push schema to db"
+npx prisma db push
 echo "Generate client"
 npx prisma generate
 
@@ -28,7 +27,8 @@ npx prisma generate
 echo "Installing backend dependencies"
 npm install
 echo "Running the backend server"
-npm start
+npm start &
+sleep 5
 
 #BACK TO THE ROOT DIR
 cd .. || exit
@@ -37,9 +37,11 @@ cd .. || exit
 echo "Setup the frontend"
 cd frontend || exit
 echo "Installing frontend dependencies"
-npm install
+npm cache clean
+npm install --legacy-peer-deps
 echo "Running the frontend server"
-npm start
+npm start &
+sleep 5
 
 echo "Global setup finished. Happy coding"
 
