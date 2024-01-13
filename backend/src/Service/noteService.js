@@ -17,11 +17,10 @@ class NoteService {
     }
     create(title, description) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log(`Repositorio creado: ${this.repository}`);
             try {
                 const result = yield this.repository.save(title, description);
                 const note = new Note_1.Note(result.id, result.title, result.description);
-                console.log(`noteService creado: ${note}`);
+                console.log(`noteService created: ${note}`);
                 return note;
             }
             catch (error) {

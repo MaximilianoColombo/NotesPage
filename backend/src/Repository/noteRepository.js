@@ -20,7 +20,7 @@ class NoteRepository {
                 const createdNote = yield this.prisma.note.create({
                     data: { title: title, description: description }
                 });
-                console.log(`noteRepository creado: ${createdNote}`);
+                console.log(`noteRepository created: ${createdNote}`);
                 return createdNote;
             }
             catch (error) {
